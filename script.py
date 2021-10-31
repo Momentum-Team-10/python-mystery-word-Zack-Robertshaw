@@ -26,9 +26,7 @@
 
 import random
 words = []
-underscores = []
 guesses = []
-end_game = False
 guess_count = 1
 
 
@@ -38,7 +36,7 @@ words_strings = all_words.read()
 words_strings = words_strings.lower().split()
 
 # this function will pick a level and return random word
-def get_level():
+def pick_level():
     level = input("Pick a level: easy, medium or hard: ").lower()
     if level == "easy":
             easy_word_list = []
@@ -46,48 +44,77 @@ def get_level():
                 if len(word) >= 4 and len(word) <= 6:
                     easy_word_list.append(word)
             random_word = random.choice(easy_word_list)
-            print(random_word)
+            # print(random_word)
     elif level == "medium":
             medium_word_list = []
             for word in words_strings:
                 if len(word) >= 6 and len(word) <= 8:
                     medium_word_list.append(word)
             random_word = random.choice(medium_word_list)
-                # return(easy_word_list)
-            print(random_word)
+            # print(random_word)
     elif level == "hard":
             hard_word_list = []
             for word in words_strings:
                 if len(word) >= 8:
                     hard_word_list.append(word)
             random_word = random.choice(hard_word_list)
-                # return(easy_word_list)
-            print(random_word)
+    # word_length = range(len(random_word))
+    print(random_word)
 
+    return(random_word)
+# pick_level()
+# print(word_length)
+
+# def gameplay():
+underscores = []
+end_game = False
+
+random_word = pick_level()
+word_length = range(len(random_word))
+for num in word_length:
+    underscores.append('_')
+underscores = "".join(underscores)
+
+print(underscores)
+user_input = input('Make a guess... ').lower()
+
+while user_input != 'Quit' and end_game == False:
+
+    for index in range(len(random_word)):
+        if random_word[index] == user_input:
+            underscores = underscores[0:index] + user_input + underscores[index+1:]
+    print(underscores)
+    user_input = input('Guess again... ')
+
+if user_input == 'Quit':
+    end_game = True
+
+# gameplay()
 # below here is a copy of the game engine following jeanettes random word choice
-            # word_length = range(len(random_word))
-            # for num in word_length:
-            #     underscores.append('_')
-            # underscores = "".join(underscores)
 
-            # print(underscores)
-            # user_input = input('Make a guess... ').lower()
+# random_word = 'random'
+# word_length = range(len(random_word))
+# for num in word_length:
+#     underscores.append('_')
+# underscores = "".join(underscores)
 
-            # while user_input != 'Quit' and end_game == False:
-            #     if guess_count == 8:
-            #         print('You have run out of guesses')
+# print(underscores)
+# user_input = input('Make a guess... ').lower()
 
-            #     for index in range(len(random_word)):
-            #         if random_word[index] == user_input:
-            #             underscores = underscores[0:index] + user_input + underscores[index+1:]
-            #     print(underscores)
-            #     user_input = input('Guess again... ')
+# while user_input != 'Quit' and end_game == False:
+#     if guess_count == 8:
+#         print('You have run out of guesses')
 
-            #     if user_input == 'Quit':
-            #         end_game = True
+#     for index in range(len(random_word)):
+#         if random_word[index] == user_input:
+#             underscores = underscores[0:index] + user_input + underscores[index+1:]
+#     print(underscores)
+#     user_input = input('Guess again... ')
+
+#     if user_input == 'Quit':
+#         end_game = True
                 
 
-get_level()
        
 
 
